@@ -12,6 +12,7 @@ public class Cuenta {
 		this.id = id;
 		this.saldoActual = 0;
 		this.tipo = "A";
+		propetario = new Cliente();
 	}
 	
 	public Cliente getPropetario() {
@@ -48,7 +49,7 @@ public class Cuenta {
 
 	public void imprimir() {
 		String mensaje;
-		mensaje = "ID: " + id + "Saldo Actual: " + saldoActual + "Tipo: " + tipo + "Cédula cliente: " + propetario.getCedula();
+		mensaje = "ID: " + id + ", Saldo Actual: " + saldoActual + ", Tipo: " + tipo + ", Cédula cliente: " + propetario.getCedula();
 
 		System.out.println(mensaje);
 	}
