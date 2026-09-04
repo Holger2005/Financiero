@@ -1,5 +1,7 @@
 package com.krakedev.financiero.servico;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,5 +35,32 @@ public class TestBanco {
         // Validar que los propietarios se hayan asignado correctamente
         assertEquals(cliente1, cuenta1.getPropetario());
         assertEquals(cliente2, cuenta2.getPropetario());
-}
+        
+	}
+	
+	@Test
+    public void testDepositarMontoValido() {
+        Banco banco = new Banco();
+        Cuenta cuenta = new Cuenta("1001"); // Inicializa saldoActual en 0
+        
+        // Se deposita un monto mayor a 0
+        boolean resultado = banco.depositar(50.0, cuenta);
+        
+        // Validaciones
+        assertTrue(resultado, "El depósito debería ser exitoso para un monto mayor a 0");
+        assertEquals(50.0, cuenta.getSaldoActual(), "El saldo actual debería reflejar el monto depositado");
+    }
+
+    @Test
+    public void testDepositarMontoInvalido() {
+        Banco banco = new Banco();
+        Cuenta cuenta = new Cuenta("1002"); // Inicializa saldoActual en 0
+        
+        // Se intenta depositar un monto inválido (menor o igual a 0)
+        boolean resultado = banco.depositar(-10.0, cuenta);
+        
+        // Validaciones
+        assertFalse(resultado, "El depósito debería fallar para un monto menor o igual a 0");
+        assertEquals(0.0, cuenta.getSaldoActual(), "El saldo de la cuenta no debería cambiar");
+    }
 }
